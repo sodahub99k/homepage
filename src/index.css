@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* Tailwind v4 + small global tweaks (no new design tokens) */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- Fluid retro background (CSS vars set from App.tsx) --- */
+.bg-grid-overlay {
+  color: color-mix(in oklab, white 12%, transparent);
+  opacity: 0.55;
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: var(--dx, 0px) var(--dy, 0px);
+}
+
+.bg-spotlight {
+  color: var(--color-emerald-500);
+  opacity: 0.14;
+  background-image:
+    radial-gradient(700px circle at var(--mx, 50%) var(--my, 50%), currentColor, transparent 60%),
+    radial-gradient(520px circle at calc(var(--mx, 50%) + 120px) calc(var(--my, 50%) - 80px), currentColor, transparent 65%);
+  filter: saturate(1.1);
+  mix-blend-mode: screen;
+  animation: spotlight-drift 10s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.bg-scanlines {
+  color: color-mix(in oklab, white 10%, transparent);
+  opacity: 0.12;
+  background-image:
+    repeating-linear-gradient(to bottom, currentColor 0px, currentColor 1px, transparent 2px, transparent 6px);
+  mix-blend-mode: overlay;
+}
+
+@keyframes spotlight-drift {
+  from {
+    transform: translate3d(-8px, 6px, 0);
+  }
+
+  to {
+    transform: translate3d(10px, -8px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-spotlight {
+    animation: none;
+  }
+
+  .marquee {
+    animation: none;
+  }
+}
+
+/* A tiny retro marquee animation */
+.marquee {
+  width: max-content;
+  animation: marquee 18s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
