@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+}
+
+@layer base {
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* keep images from overflowing in cards */
+img {
+  max-width: 100%;
+  height: auto;
+}

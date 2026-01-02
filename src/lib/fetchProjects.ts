@@ -1,14 +1,18 @@
 export type Project = {
   title: string;
   description: string;
-  url: string;
-  repo: string;
-  tags?: string[];
-  date?: string;
-  thumbnail: string;
+  tags: string[];
+  date: string;
 };
 
-export async function fetchProjects(): Promise<Project[]> {
+export type ProjectWithLinks = Project & {
+  url_demo: string;
+  url_git: string;
+  url_thumbnail: string;
+};
+
+
+export async function fetchProjects(): Promise<ProjectWithLinks[]> {
   const username = import.meta.env.VITE_GITHUB_USERNAME as string | undefined;
   if (!username) return [];
 
@@ -24,23 +28,17 @@ export async function fetchProjects(): Promise<Project[]> {
         if (!metaRes.ok) return null;
 
         const meta = await metaRes.json();
-
-        const title = (meta?.title ?? repo.name) as string;
-        const description = (meta?.description ?? repo.description ?? "") as string;
-        const url = (meta?.url ?? repo.homepage ?? repo.html_url) as string;
-        const repoUrl = (meta?.repo ?? repo.html_url) as string;
-        const tags = Array.isArray(meta?.tags) ? (meta.tags as string[]) : undefined;
-        const date = typeof meta?.date === "string" ? (meta.date as string) : undefined;
-
+        const url_git = repo.html_url;
+        const url_demo = `https://${username}.github.io/${repo.name}/`;
+        const url_thumbnail = `https://raw.githubusercontent.com/${username}/${repo.name}/main/thumbnail.png`;
+        console.log(url_thumbnail);
+        https://raw.githubusercontent.com/sodahub99k/LetterBoxedJP/main/thumbnail.png
         return {
-          title,
-          description,
-          url,
-          repo: repoUrl,
-          tags,
-          date,
-          thumbnail: `https://raw.githubusercontent.com/${username}/${repo.name}/main/thumbnail.png`,
-        } satisfies Project;
+          ...meta,
+          url_demo,
+          url_git,
+          url_thumbnail,
+        } satisfies ProjectWithLinks;
       } catch {
         return null;
       }
