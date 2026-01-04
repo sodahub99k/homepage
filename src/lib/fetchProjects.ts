@@ -13,11 +13,14 @@ export type ProjectWithLinks = Project & {
 
 
 export async function fetchProjects(): Promise<ProjectWithLinks[]> {
+
+
   const username = import.meta.env.VITE_GITHUB_USERNAME as string | undefined;
   if (!username) return [];
 
   const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
   const repos = await res.json();
+
 
   const projects = await Promise.all(
     repos.map(async (repo: any) => {
@@ -31,12 +34,15 @@ export async function fetchProjects(): Promise<ProjectWithLinks[]> {
         const url_git = repo.html_url;
         const url_demo = `https://${username}.github.io/${repo.name}/`;
         const url_thumbnail = `https://raw.githubusercontent.com/${username}/${repo.name}/main/thumbnail.png`;
-        return {
+
+        const res: ProjectWithLinks = {
           ...meta,
           url_demo,
           url_git,
           url_thumbnail,
-        } satisfies ProjectWithLinks;
+        };
+
+        return res;
       } catch {
         return null;
       }

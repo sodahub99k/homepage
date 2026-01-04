@@ -108,9 +108,6 @@ const App = () => {
               </p>
 
               <div class="cta">
-                {/* <ButtonLink href="#projects" variant="primary">
-                  作品を見る
-                </ButtonLink> */}
                 <Show when={username()} keyed>
                   {(u) => (
                     <ButtonLink href={`https://github.com/${u}`} variant="ghost">
@@ -120,40 +117,6 @@ const App = () => {
                 </Show>
               </div>
             </div>
-
-            {/* Right panel */}
-            {/* <div >
-              <div >
-                <p >STATUS</p>
-                <span >
-                  <span  />
-                  online
-                </span>
-              </div>
-              <dl >
-                <div >
-                  <dt >stack</dt>
-                  <dd >Solid + Tailwind</dd>
-                </div>
-                <div >
-                  <dt >source</dt>
-                  <dd >GitHub repos</dd>
-                </div>
-                <div >
-                  <dt >updated</dt>
-                  <dd >2026-01-01</dd>
-                </div>
-                <div >
-                  <dt >mood</dt>
-                  <dd >retro-future</dd>
-                </div>
-              </dl>
-              <div >
-                <p >
-                  ここは自由枠。あとで「今やってること」「展示」「文章」などに差し替え可能です。
-                </p>
-              </div>
-            </div> */}
           </div>
         </section>
 
