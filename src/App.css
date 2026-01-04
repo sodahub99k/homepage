@@ -1,0 +1,316 @@
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  ::selection {
+    @apply bg-red-100 text-neutral-950;
+  }
+}
+
+@layer components {
+  .page {
+    @apply relative min-h-dvh bg-white text-neutral-950 antialiased;
+  }
+
+  /* Background: Swiss-ish subtle grid + pointer-driven highlight */
+  .bg-layer {
+    @apply pointer-events-none absolute inset-0;
+  }
+
+  .bg-layer--grid {
+    background-image:
+      linear-gradient(to right,
+        color-mix(in oklab, currentColor 6%, transparent) 1px,
+        transparent 1px),
+      linear-gradient(to bottom,
+        color-mix(in oklab, currentColor 6%, transparent) 1px,
+        transparent 1px);
+    background-size: 96px 96px;
+    opacity: 0.35;
+  }
+
+  .bg-layer--spot {
+    background: radial-gradient(900px circle at var(--mx, 50vw) var(--my, 50vh),
+        color-mix(in oklab, currentColor 10%, transparent),
+        transparent 55%);
+    opacity: 0.75;
+  }
+
+  .bg-layer--fade {
+    background: linear-gradient(to bottom,
+        color-mix(in oklab, currentColor 0%, transparent),
+        color-mix(in oklab, currentColor 4%, transparent));
+    opacity: 1;
+  }
+
+  .topbar {
+    @apply relative z-10 border-b border-neutral-200;
+  }
+
+  .topbar__inner {
+    @apply mx-auto flex max-w-6xl items-baseline justify-between px-6 py-4 md:px-10;
+  }
+
+  .brand {
+    @apply text-sm font-semibold uppercase tracking-[0.28em] underline-offset-4 decoration-red-600 hover:underline;
+  }
+
+  .nav {
+    @apply flex items-center gap-6 text-sm uppercase tracking-[0.2em] text-neutral-700;
+  }
+
+  .nav a {
+    @apply underline-offset-4 decoration-red-600 hover:underline;
+  }
+
+  .main {
+    @apply relative z-10;
+  }
+
+  .section {
+    @apply mx-auto w-full max-w-6xl px-6 py-8 md:px-10 md:py-12;
+  }
+
+  .hero {
+    @apply pt-10 md:pt-14;
+  }
+
+  .hero__grid {
+    @apply grid gap-10 md:grid-cols-12;
+  }
+
+  .hero__lead {
+    @apply md:col-span-8;
+  }
+
+  .hero__title {
+    @apply text-5xl font-semibold leading-none tracking-tight md:text-7xl;
+  }
+
+  .hero__subtitle {
+    @apply mt-4 max-w-prose text-lg leading-relaxed text-neutral-700 md:text-xl;
+  }
+
+  .cta {
+    @apply mt-8 flex flex-wrap items-center gap-4;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 border border-neutral-900 px-4 py-2 text-sm font-medium uppercase tracking-[0.18em] transition-colors duration-200;
+    transition-property: transform, background-color, border-color, color;
+  }
+
+  .btn:focus-visible,
+  .brand:focus-visible,
+  .nav a:focus-visible,
+  .card__links a:focus-visible,
+  .card--clickable:focus-visible {
+    @apply outline-none ring-2 ring-red-500 ring-offset-2 ring-offset-white;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn:active {
+    transform: translateY(0px);
+  }
+
+  .btn--primary {
+    @apply bg-neutral-900 text-white hover:bg-neutral-800;
+  }
+
+  .btn--ghost {
+    @apply bg-transparent text-neutral-900 hover:bg-red-50;
+  }
+
+  .btn__arrow {
+    @apply text-base transition-transform duration-200;
+  }
+
+  .btn:hover .btn__arrow {
+    transform: translateX(4px);
+  }
+
+  .section-title {
+    @apply flex flex-col gap-2 border-b border-neutral-200 pb-4 md:flex-row md:items-end md:justify-between;
+  }
+
+  .section-title h2 {
+    @apply text-3xl font-semibold tracking-tight md:text-4xl;
+  }
+
+  .section-title p {
+    @apply max-w-prose text-sm leading-relaxed text-neutral-600;
+  }
+
+  .projects-wrap {
+    @apply mt-10;
+  }
+
+  .projects-grid {
+    @apply grid gap-6 md:grid-cols-2;
+  }
+
+  .skeleton-grid {
+    @apply grid gap-6 md:grid-cols-2;
+  }
+
+  .skeleton-card {
+    @apply h-64 rounded border border-neutral-200 bg-neutral-50 animate-pulse;
+  }
+
+  .empty {
+    @apply rounded border border-neutral-200 p-6 text-sm text-neutral-600;
+  }
+
+  .about-grid {
+    @apply mt-10 grid gap-10 md:grid-cols-12;
+  }
+
+  .about-col {
+    @apply md:col-span-6;
+  }
+
+  .about-col h3 {
+    @apply text-sm font-semibold uppercase tracking-[0.28em];
+  }
+
+  .about-col p {
+    @apply mt-4 leading-relaxed text-neutral-700;
+  }
+
+  .now-list {
+    @apply mt-4 space-y-2;
+  }
+
+  .now-item {
+    @apply flex gap-3 text-neutral-800;
+  }
+
+  .now-bullet {
+    @apply text-neutral-400;
+  }
+
+  .pill {
+    @apply inline-flex items-center border border-neutral-200 px-2 py-1 text-xs tracking-[0.18em] text-neutral-700 transition-colors duration-200;
+  }
+
+  /* 
+  .pill:hover {
+    @apply border-red-200 bg-red-50 text-red-700;
+  } */
+
+  .footer {
+    @apply relative z-10 border-t border-neutral-200;
+  }
+
+  .footer__inner {
+    @apply mx-auto max-w-6xl px-6 py-8 text-xs uppercase tracking-[0.28em] text-neutral-600 md:px-10;
+  }
+
+  .card {
+    @apply relative border border-neutral-200 bg-white;
+    transition-property: transform, border-color, box-shadow;
+    transition-duration: 200ms;
+  }
+
+  .card--clickable {
+    @apply cursor-pointer;
+  }
+
+  .card:hover {
+    @apply border-neutral-400;
+    transform: translateY(-2px);
+    box-shadow: 0 1px 0 0 color-mix(in oklab, currentColor 18%, transparent);
+  }
+
+  .card:active {
+    transform: translateY(0px);
+  }
+
+  .card__rail {
+    @apply absolute left-0 top-0 h-full w-1 bg-red-600 transition-colors duration-200;
+  }
+
+  .card:hover .card__rail {
+    @apply bg-red-700;
+  }
+
+  .card__media {
+    @apply relative aspect-[16/9] overflow-hidden border-b border-neutral-200 bg-neutral-50;
+  }
+
+  .card__media img {
+    @apply h-full w-full object-cover transition-transform duration-300;
+  }
+
+  .card:hover .card__media img {
+    transform: scale(1.03);
+  }
+
+  .card__body {
+    @apply p-6;
+  }
+
+  .card__head {
+    @apply flex items-baseline justify-between gap-4;
+  }
+
+  .card__title {
+    @apply text-xl font-semibold tracking-tight;
+  }
+
+  .card__type {
+    @apply text-xs uppercase tracking-[0.28em] text-neutral-500;
+  }
+
+  .card__desc {
+    @apply mt-3 text-sm leading-relaxed text-neutral-700;
+  }
+
+  .card__tags {
+    @apply mt-4 flex flex-wrap gap-2;
+  }
+
+  .card__foot {
+    @apply mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-200 pt-4 text-xs text-neutral-600;
+  }
+
+  .card__links {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .card__btn {
+    @apply inline-flex items-center justify-center border border-neutral-900 px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] text-neutral-900 transition-colors duration-200;
+    transition-property: transform, background-color, border-color, color;
+  }
+
+  .card__btn:hover {
+    @apply border-red-600 bg-red-50 text-red-700;
+    transform: translateY(-1px);
+  }
+
+  .card__btn:active {
+    transform: translateY(0px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .btn,
+    .btn__arrow,
+    .card,
+    .card__media img,
+    .pill,
+    .card__btn {
+      transition: none !important;
+    }
+
+    .btn:hover,
+    .card:hover,
+    .card:hover .card__media img {
+      transform: none !important;
+    }
+  }
+}

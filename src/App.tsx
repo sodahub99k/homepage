@@ -2,46 +2,8 @@ import { createMemo, createResource, For, onCleanup, onMount, Show } from "solid
 import { fetchProjects } from "./lib/fetchProjects";
 import ProjectCard from "./components/ProjectCard";
 
-function SectionTitle(props: { id?: string; title: string; subtitle?: string }) {
-  return (
-    <header >
-      <h2
-        id={props.id}
-
-      >
-        {props.title}
-      </h2>
-      <Show when={props.subtitle}>
-        <p >
-          {props.subtitle}
-        </p>
-      </Show>
-    </header>
-  );
-}
-
-function Pill(props: { children: any }) {
-  return (
-    <span >
-      {props.children}
-    </span>
-  );
-}
-
-function ButtonLink(props: { href: string; children: string; variant?: "primary" | "ghost" }) {
-  const isPrimary = () => props.variant !== "ghost";
-  return (
-    <a
-      href={props.href}
-
-    >
-      {props.children}
-      <span aria-hidden >
-        →
-      </span>
-    </a>
-  );
-}
+import SectionTitle from "./components/SectionTitle";
+import ButtonLink from "./components/ButtonLink";
 
 const App = () => {
   const [projects] = createResource(fetchProjects);
@@ -113,42 +75,39 @@ const App = () => {
   return (
     <div
       ref={rootRef}
-
+      class="page"
     >
       {/* Fluid background layers (CSS/JS only via CSS variables) */}
-      <div aria-hidden />
-      <div aria-hidden />
-      <div aria-hidden />
+      <div aria-hidden class="bg-layer bg-layer--grid" />
+      <div aria-hidden class="bg-layer bg-layer--spot" />
+      <div aria-hidden class="bg-layer bg-layer--fade" />
 
-      <header >
-        <div >
-          <a href="#top" >
+      <header class="topbar">
+        <div class="topbar__inner">
+          <a href="#top" class="brand">
             sodahub99k | HOME
           </a>
-          <nav >
+          <nav class="nav">
             <a href="#projects">
               Projects
-            </a>
-            <a href="#about">
-              About
             </a>
           </nav>
         </div>
       </header>
 
-      <main id="top">
+      <main id="top" class="main">
         {/* HERO */}
-        <section >
-          <div >
-            <div>
-              <h1 >
+        <section class="section hero">
+          <div class="hero__grid">
+            <div class="hero__lead">
+              <h1 class="hero__title">
                 sodahub99k
               </h1>
-              <p >
+              <p class="hero__subtitle">
                 engineering student / B3
               </p>
 
-              <div >
+              <div class="cta">
                 {/* <ButtonLink href="#projects" variant="primary">
                   作品を見る
                 </ButtonLink> */}
@@ -199,21 +158,21 @@ const App = () => {
         </section>
 
         {/* PROJECTS */}
-        <section >
+        <section class="section">
           <SectionTitle
             id="projects"
             title="Projects"
           // subtitle="GitHub の repo から project.json を見つけたものだけ表示します（サムネは thumbnail.png）。"
           />
 
-          <div >
+          <div class="projects-wrap">
             <Show
               when={projects.state !== "pending"}
               fallback={
-                <div >
+                <div class="skeleton-grid">
                   <For each={Array.from({ length: 6 })}>
                     {() => (
-                      <div />
+                      <div class="skeleton-card" />
                     )}
                   </For>
                 </div>
@@ -222,12 +181,12 @@ const App = () => {
               <Show
                 when={(projects() ?? []).length > 0}
                 fallback={
-                  <div >
-                    <p >表示できる作品がまだありません。</p>
+                  <div class="empty">
+                    <p>表示できる作品がまだありません。</p>
                   </div>
                 }
               >
-                <div >
+                <div class="projects-grid">
                   <For each={sortedProjects()}>
                     {(project) => <ProjectCard {...project} />}
                   </For>
@@ -236,49 +195,11 @@ const App = () => {
             </Show>
           </div>
         </section>
-
-        {/* ABOUT */}
-        <section >
-          <SectionTitle
-            id="about"
-            title="About"
-          // subtitle="作ったものを並べるだけじゃなく、何に惹かれているかも残す場所。"
-          />
-          <div >
-            <div >
-              <h3 >Hello</h3>
-              <p >
-                作品は「完成品」より「変化している途中」が好きです。
-                触ると反応する UI、少しだけ無駄がある遊び、古い端末っぽい質感など。
-              </p>
-              <p >
-                ここはトップページなので、あとで文章や写真、展示情報などに差し替えやすい構造にしています。
-              </p>
-            </div>
-            <div >
-              <h3 >Now</h3>
-              <ul >
-                <li >
-                  <span >▸</span>
-                  <span>小さいプロトタイプを速く作る</span>
-                </li>
-                <li >
-                  <span >▸</span>
-                  <span>レトロUIと現代的な触感の合体</span>
-                </li>
-                <li >
-                  <span >▸</span>
-                  <span>文章とコードのあいだの表現</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
       </main>
 
-      <footer >
-        <div >
-          <p >© {new Date().getFullYear()} sodahub99k</p>
+      <footer class="footer">
+        <div class="footer__inner">
+          <p>© {new Date().getFullYear()} sodahub99k</p>
         </div>
       </footer>
     </div>

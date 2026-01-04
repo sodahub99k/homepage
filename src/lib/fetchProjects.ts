@@ -31,8 +31,6 @@ export async function fetchProjects(): Promise<ProjectWithLinks[]> {
         const url_git = repo.html_url;
         const url_demo = `https://${username}.github.io/${repo.name}/`;
         const url_thumbnail = `https://raw.githubusercontent.com/${username}/${repo.name}/main/thumbnail.png`;
-        console.log(url_thumbnail);
-        https://raw.githubusercontent.com/sodahub99k/LetterBoxedJP/main/thumbnail.png
         return {
           ...meta,
           url_demo,

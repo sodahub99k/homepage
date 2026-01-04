@@ -1,71 +1,74 @@
 import { For, Show } from "solid-js";
 import { type ProjectWithLinks } from "../lib/fetchProjects";
+import ButtonLink from "./ButtonLink";
+
 
 export default function ProjectCard(props: ProjectWithLinks) {
+  const openDemo = () => {
+    if (!props.url_demo) return;
+    window.open(props.url_demo, "_blank", "noreferrer");
+  };
+
+  const onCardClick = (e: MouseEvent) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    if (target.closest("a, button")) return;
+    openDemo();
+  };
+
+  const onCardKeyDown = (e: KeyboardEvent) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    openDemo();
+  };
+
   return (
-    <article >
-      <div aria-hidden >
-        <div />
-      </div>
+    <article
+      class="card card--clickable"
+      role="link"
+      tabIndex={0}
+      aria-label={`${props.title} demo を開く`}
+      onClick={onCardClick}
+      onKeyDown={onCardKeyDown}
+    >
+      <div aria-hidden class="card__rail" />
 
-      <div >
+      <div class="card__media">
         <img
-
           src={props.url_thumbnail}
           alt={`${props.title} thumbnail`}
           loading="lazy"
         />
-        <div />
       </div>
 
-      <div >
-        <div >
-          <h3 >
+      <div class="card__body">
+        <div class="card__head">
+          <h3 class="card__title">
             {props.title}
           </h3>
-          <span >
-            WORK
-          </span>
         </div>
 
-        <p >
+        <p class="card__desc">
           {props.description}
         </p>
 
         <Show when={(props.tags?.length ?? 0) > 0}>
-          <div >
+          <div class="card__tags">
             <For each={(props.tags ?? []).slice(0, 6)}>
               {(tag: string) => (
-                <span >
-                  #{tag}
-                </span>
+                <span class="pill">#{tag}</span>
               )}
             </For>
           </div>
         </Show>
 
-        <div >
+        <div class="card__foot">
           <Show when={props.date}>
-            <span >{props.date}</span>
+            <span>{props.date}</span>
           </Show>
-          <div >
-            <a
-
-              href={props.url_demo}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Demo →
-            </a>
-            <a
-
-              href={props.url_git}
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub →
-            </a>
-          </div>
+          <ButtonLink href={props.url_git} variant="ghost">
+            GitHub
+          </ButtonLink>
         </div>
       </div>
     </article>
