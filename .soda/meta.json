@@ -1,0 +1,8 @@
+{
+  "title": "soda homepage",
+  "description": "Personal portfolio portal for soda projects",
+  "category": "tool",
+  "topics": ["portfolio", "react", "vite"],
+  "visible": false,
+  "status": "stable"
+}
