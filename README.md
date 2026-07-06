@@ -13,7 +13,7 @@ pnpm dev
 ## 初回公開
 
 ```bash
-pnpm publish:github
+pnpm publish
 ```
 
 `scripts/publish-github.sh` が public リポジトリ作成・push・Pages 有効化・About/topics 同期を行います。
