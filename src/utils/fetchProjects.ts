@@ -18,9 +18,7 @@ const REQUIRED_KEYS = [
   "title",
   "description",
   "category",
-  "topics",
   "visible",
-  "status",
 ] as const satisfies readonly (keyof SodaMeta)[];
 
 type MetaFetchResult =
@@ -73,29 +71,10 @@ export function validateSodaMeta(data: unknown): string[] {
     messages.push(`"category" must be a non-empty string`);
   }
 
-  if ("topics" in obj) {
-    if (!Array.isArray(obj.topics)) {
-      messages.push(`"topics" must be an array, got ${typeLabel(obj.topics)}`);
-    } else {
-      const bad = obj.topics.findIndex((t) => typeof t !== "string");
-      if (bad !== -1) {
-        messages.push(
-          `"topics[${bad}]" must be string, got ${typeLabel(obj.topics[bad])}`,
-        );
-      }
-    }
-  }
-
   if ("visible" in obj && typeof obj.visible !== "boolean") {
     messages.push(
       `"visible" must be boolean, got ${typeLabel(obj.visible)}`,
     );
-  }
-
-  if ("status" in obj && typeof obj.status !== "string") {
-    messages.push(`"status" must be string, got ${typeLabel(obj.status)}`);
-  } else if (typeof obj.status === "string" && obj.status.trim() === "") {
-    messages.push(`"status" must be a non-empty string`);
   }
 
   return messages;
@@ -212,7 +191,6 @@ export async function fetchSodaProjects(): Promise<SodaListItem[]> {
         title: result.meta.title,
         description: result.meta.description,
         category: result.meta.category,
-        status: result.meta.status,
         stars: repo.stargazers_count,
         gitUrl: repo.html_url,
         demoUrl: demoUrl(owner, repo.name),

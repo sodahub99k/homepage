@@ -119,16 +119,6 @@
   color: #9aa3b2;
 }
 
-.badge-stable {
-  background: #1a3a2a;
-  color: #6dd99a;
-}
-
-.badge-wip {
-  background: #3a2f1a;
-  color: #e8b84a;
-}
-
 .badge-error {
   background: #3a1a1a;
   color: #ff8a8a;

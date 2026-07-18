@@ -2,9 +2,7 @@ export interface SodaMeta {
   title: string;
   description: string;
   category: string;
-  topics: string[];
   visible: boolean;
-  status: string;
 }
 
 export interface GitHubRepo {
@@ -19,7 +17,6 @@ export interface SodaProject {
   title: string;
   description: string;
   category: string;
-  status: string;
   stars: number;
   gitUrl: string;
   demoUrl: string;

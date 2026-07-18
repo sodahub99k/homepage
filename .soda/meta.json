@@ -2,7 +2,6 @@
   "title": "homepage",
   "description": "Personal portfolio portal for sodahub99k projects",
   "category": "tool",
-  "topics": ["react", "vite"],
   "visible": false,
-  "status": "stable"
+  "featured": false
 }

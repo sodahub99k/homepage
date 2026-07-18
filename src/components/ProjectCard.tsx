@@ -27,7 +27,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
               {project.title}
             </a>
           </h2>
-          <span className={`badge badge-${project.status}`}>{project.status}</span>
         </div>
         <p className="card-desc">{project.description}</p>
         <div className="card-meta">
