@@ -9,12 +9,12 @@ export function useSodaProjects(): FetchState {
     let cancelled = false;
 
     fetchSodaProjects()
-      .then((projects) => {
+      .then((items) => {
         if (cancelled) return;
-        if (projects.length === 0) {
+        if (items.length === 0) {
           setState({ status: "empty" });
         } else {
-          setState({ status: "success", projects });
+          setState({ status: "success", items });
         }
       })
       .catch((err: unknown) => {

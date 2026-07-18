@@ -1,4 +1,5 @@
 import { Hero } from "./components/Hero";
+import { MetaErrorCard } from "./components/MetaErrorCard";
 import { ProjectCard } from "./components/ProjectCard";
 import { useSodaProjects } from "./hooks/useSodaProjects";
 import "./App.css";
@@ -27,9 +28,19 @@ export default function App() {
 
       {state.status === "success" && (
         <section className="grid" aria-label="Projects">
-          {state.projects.map((project) => (
-            <ProjectCard key={project.repoName} project={project} />
-          ))}
+          {state.items.map((item) =>
+            item.kind === "project" ? (
+              <ProjectCard
+                key={item.project.repoName}
+                project={item.project}
+              />
+            ) : (
+              <MetaErrorCard
+                key={`error-${item.error.repoName}`}
+                error={item.error}
+              />
+            ),
+          )}
         </section>
       )}
     </div>

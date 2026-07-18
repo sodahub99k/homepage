@@ -129,6 +129,31 @@
   color: #e8b84a;
 }
 
+.badge-error {
+  background: #3a1a1a;
+  color: #ff8a8a;
+}
+
+.card-error {
+  border-color: #4a2a2a;
+}
+
+.card-error:hover {
+  border-color: #6a3a3a;
+}
+
+.error-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.8rem;
+  color: #ff8a8a;
+  line-height: 1.45;
+}
+
+.error-list li + li {
+  margin-top: 0.25rem;
+}
+
 .card-desc {
   margin: 0;
   font-size: 0.9rem;

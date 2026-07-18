@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/main.tsx","./src/types.ts","./src/vite-env.d.ts","./src/components/hero.tsx","./src/components/projectcard.tsx","./src/hooks/usesodaprojects.ts","./src/utils/fetchprojects.ts","./src/utils/urls.ts"],"version":"5.8.3"}
+{"root":["./src/app.tsx","./src/main.tsx","./src/types.ts","./src/vite-env.d.ts","./src/components/hero.tsx","./src/components/metaerrorcard.tsx","./src/components/projectcard.tsx","./src/hooks/usesodaprojects.ts","./src/utils/fetchprojects.ts","./src/utils/urls.ts"],"version":"5.8.3"}
